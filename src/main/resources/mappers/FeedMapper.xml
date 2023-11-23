@@ -22,6 +22,7 @@
                 ,B.location
                 ,B.iuser as writerIuser
                 ,A.nm as writerNm
+                ,A.pic as writerPic
                 , B.created_at as createdAt
                 ,if(C.iuser is null,0,1) as isFav
         From t_user A
@@ -37,4 +38,29 @@
         LIMIT #{startIdx}, #{rowCount}
 
     </select>
+    <select id="selIuser">
+        Select iuser
+        From t_feed
+        Where ifeed = #{ifeed}
+    </select>
+
+    <delete id="delFeedByFav">
+        Delete From t_feed_fav
+        Where ifeed = #{ifeed}
+    </delete>
+
+    <delete id="delFeedByComment">
+        Delete From t_feed_comment
+        Where ifeed = #{ifeed}
+    </delete>
+
+    <delete id="delFeedByPics">
+        Delete From t_feed_pics
+        Where ifeed = #{ifeed}
+    </delete>
+
+    <delete id="delFeedByFeed">
+        Delete From t_feed
+        Where ifeed = #{ifeed}
+    </delete>
 </mapper>

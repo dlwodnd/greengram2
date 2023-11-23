@@ -17,4 +17,13 @@
         From t_feed_pics
         Where ifeed = #{ifeed}
     </select>
+    
+    <select id="selFeedPic">
+        Select ifeed,pic
+        From t_feed_pics
+        Where ifeed =
+        <foreach collection="ifeedList" item="ifeed">
+            #{ifeed}
+        </foreach>
+    </select>
 </mapper>

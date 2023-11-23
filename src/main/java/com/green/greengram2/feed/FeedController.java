@@ -1,10 +1,7 @@
 package com.green.greengram2.feed;
 
 import com.green.greengram2.ResVo;
-import com.green.greengram2.feed.models.FeedInsDto;
-import com.green.greengram2.feed.models.FeedInsProcDto;
-import com.green.greengram2.feed.models.FeedSelDto;
-import com.green.greengram2.feed.models.FeedSelVo;
+import com.green.greengram2.feed.models.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -48,4 +45,30 @@ public class FeedController {
                 .build();
         return service.getFeedAll(dto);
     }
+    @GetMapping("/fav")
+    public ResVo toggleFeedFav(FeedFavDto dto){
+        log.info("dto : {}",dto);
+        return service.toggleFeedFav(dto);
+    }
+    @PostMapping("/comment")
+    public ResVo insComment(@RequestBody FeedCommentInsDto dto){
+        return service.insComment(dto);
+    }
+
+    @GetMapping("/comment")
+    public List<FeedCommentSelVo> getcommentAll(int ifeed){
+        return service.getCommentAll(ifeed);
+    }
+    @DeleteMapping("/comment")
+    public ResVo delComment(@RequestParam("ifeed_comment") int ifeedComment
+                            ,@RequestParam("logined_iuser") int loginedIuser){
+        log.info("ifeedComment : {}, loginedIuser : {}",ifeedComment,loginedIuser);
+        return service.delComment(FeedCommentDelDto.builder().ifeedComment(ifeedComment).loginedIuser(loginedIuser).build());
+    }
+    @DeleteMapping
+    public ResVo delFeed(FeedDelDto dto){
+
+        return service.delFeed(dto);
+    }
+
 }

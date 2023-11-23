@@ -49,4 +49,12 @@ public class UserService {
 
         return new ResVo(pDto.getIuser());
     }
+
+    public UserInfoVo selUserInfo(int targetUser){
+        return mapper.selUserInfo(targetUser);
+    }
+    public ResVo patchUserPic(UserPatchPicDto dto){
+        int result = mapper.updUserPic(dto);
+        return new ResVo(result);
+    }
 }

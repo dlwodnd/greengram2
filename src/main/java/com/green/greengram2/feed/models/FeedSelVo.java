@@ -15,4 +15,6 @@ public class FeedSelVo {
     private String writerPic;
     private int isFav; //1:좋아요, 0:아님
     private List<String> pics;
+    private List<FeedCommentSelVo> comments;
+    private int isMoreComment;
 }

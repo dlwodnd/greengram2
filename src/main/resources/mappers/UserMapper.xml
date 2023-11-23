@@ -16,7 +16,20 @@
         SELECT iuser,upw,nm,pic FROM t_user
         WHERE uid = #{uid}
     </select>
+    <select id="selUserInfo">
+        SELECT A.nm, A.created_at AS createdAt, count(DISTINCT B.ifeed) as feedCnt,COUNT(C.iuser) AS favCnt,A.pic
+        FROM t_user A
+        left JOIN t_feed B
+        ON A.iuser = B.iuser
+        LEFT JOIN t_feed_fav C
+        ON C.ifeed = B.ifeed
+        WHERE A.iuser = #{targetIuser}
+    </select>
+    <update id="updUserPic">
+        Update t_user
+        Set pic = #{pic}
+        Where iuser = #{iuser}
 
-
+    </update>
 
 </mapper>
